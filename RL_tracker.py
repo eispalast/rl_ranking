@@ -14,7 +14,7 @@ def parse_json(answer):
     return this_player
 
 #feel free to add more steam ids
-steam_ids=['76561198007668368'] 
+steam_ids=['76561198327846028','76561199023677910','76561198446567626'] 
 all_players={}
 session =HTMLSession()
 for id in steam_ids:
