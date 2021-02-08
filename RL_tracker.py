@@ -1,6 +1,9 @@
 from requests_html import HTMLSession
 import json
 
+# Insert your API_key here
+API_key="XXXXXXXXXXX-XXXXX-XXXXXX-XXXXXXXX"
+
 def parse_json(answer):
     answer=answer["data"]
     this_player={}
@@ -17,10 +20,10 @@ def parse_json(answer):
 steam_ids=['76561198327846028','76561199023677910','76561198446567626'] 
 all_players={}
 session =HTMLSession()
+headers={'TRN-Api-Key':API_key}
 for id in steam_ids:
-    url= f"https://api.tracker.gg/api/v2/rocket-league/standard/profile/steam/{id}/"
-    response = session.get(url)
-    response.html.render()
-    all_players[id]=parse_json(json.loads(response.html.html.split("\">",1)[1].split("</pre>",1)[0]))
+    url= f"https://public-api.tracker.gg/v2/rocket-league/standard/profile/steam/{id}"
+    response = session.get(url,headers=headers)
+    all_players[id]=parse_json(json.loads(response.text))
 
 print(json.dumps(all_players, indent=4))
